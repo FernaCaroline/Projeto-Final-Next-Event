@@ -11,8 +11,8 @@ using NextEvent.Models;
 namespace NextEvent.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20251015025436_AdicionandoModelosBase")]
-    partial class AdicionandoModelosBase
+    [Migration("20251016042813_InitialClean")]
+    partial class InitialClean
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,13 +31,15 @@ namespace NextEvent.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
+                        .HasMaxLength(200)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
                         .IsRequired()
+                        .HasMaxLength(120)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Senha")
+                    b.Property<string>("SenhaHash")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -117,13 +119,15 @@ namespace NextEvent.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
+                        .HasMaxLength(150)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
                         .IsRequired()
+                        .HasMaxLength(120)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Senha")
+                    b.Property<string>("SenhaHash")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

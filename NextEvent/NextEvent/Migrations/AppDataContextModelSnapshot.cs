@@ -28,13 +28,15 @@ namespace NextEvent.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
+                        .HasMaxLength(200)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
                         .IsRequired()
+                        .HasMaxLength(120)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Senha")
+                    b.Property<string>("SenhaHash")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -114,13 +116,15 @@ namespace NextEvent.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
+                        .HasMaxLength(150)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
                         .IsRequired()
+                        .HasMaxLength(120)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Senha")
+                    b.Property<string>("SenhaHash")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
