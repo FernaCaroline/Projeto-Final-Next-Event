@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations; // para uso do required e length
+
 using Microsoft.AspNetCore.Identity;
 
 namespace NextEvent.Models;
 
 public class Participante
 {
+
+    //os campos foram deixados como obrigatórios, através do Required, com um limitador de caracteres, exceto o de senha, por conta do hash.
     public int Id { get; set; }
 
     [Required, MaxLength(120)]
@@ -14,13 +17,9 @@ public class Participante
     public string Email { get; set; } = string.Empty;
 
     [Required]
-    public string SenhaHash { get; set; } = string.Empty;
+    public string Senha { get; set; } = string.Empty;
 
-    public ICollection<Inscricao>? Inscricoes { get; set; }
+    public DateTime CriadoEm { get; set; } = DateTime.Now;
 
-    public void DefinirSenha(string senha, IPasswordHasher<Participante> hasher)
-        => SenhaHash = hasher.HashPassword(this, senha);
 
-    public bool VerificarSenha(string senha, IPasswordHasher<Participante> hasher)
-        => hasher.VerifyHashedPassword(this, SenhaHash, senha) != PasswordVerificationResult.Failed;
 }
