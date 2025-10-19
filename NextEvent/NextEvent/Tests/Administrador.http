@@ -1,0 +1,37 @@
+### Cadastrar administrador - POST
+POST http://localhost:5162/api/administrador/cadastrar
+Content-Type: application/json
+
+{
+  "Nome" : "NvTeste 1",
+  "Email" : "nvteste1@gmail.com",
+  "Senha" : "Senh@NvTest123"
+}
+
+### Listar Administrador - GET
+GET http://localhost:5162/api/administrador/listar
+Content-Type: application/json
+        
+### Validação de login administrador - POST
+POST http://localhost:5162/api/administrador/login
+Content-Type: application/json
+
+{
+  
+  "Email" : "nvteste1@gmail.com",
+  "Senha" : "Senh@NvTest1"
+  
+}
+
+### Atualizar administrador - PUT
+PUT http://localhost:5162/api/administrador/atualizar/4
+Content-Type: application/json
+
+{
+    "nome": "NvTeste 1 Att",
+    "email": "nvteste1@gmail.com",
+    "senha": "Senh@AtualizadaTest1"
+}
+
+### Deletar administrador - DELETE
+DELETE http://localhost:5162/api/admnistrador/deletar/4

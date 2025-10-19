@@ -6,7 +6,6 @@ namespace NextEvent.Models;
 
 public class AppDataContext : DbContext
 {
-    //   public DbSet<Usuario> Usuario { get; set; }
     public DbSet<Administrador> Administradores { get; set; }
     public DbSet<Evento> Eventos { get; set; }
     public DbSet<Inscricao> Inscricoes { get; set; }
