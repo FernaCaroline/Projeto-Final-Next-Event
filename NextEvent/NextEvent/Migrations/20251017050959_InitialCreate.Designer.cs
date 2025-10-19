@@ -11,8 +11,8 @@ using NextEvent.Models;
 namespace NextEvent.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20251016042813_InitialClean")]
-    partial class InitialClean
+    [Migration("20251017050959_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,7 @@ namespace NextEvent.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(200)
+                        .HasMaxLength(150)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
@@ -39,7 +39,7 @@ namespace NextEvent.Migrations
                         .HasMaxLength(120)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("SenhaHash")
+                    b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -117,6 +117,9 @@ namespace NextEvent.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("CriadoEm")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -127,7 +130,7 @@ namespace NextEvent.Migrations
                         .HasMaxLength(120)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("SenhaHash")
+                    b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -154,7 +157,7 @@ namespace NextEvent.Migrations
                         .HasForeignKey("EventoId");
 
                     b.HasOne("NextEvent.Models.Participante", "Participante")
-                        .WithMany("Inscricoes")
+                        .WithMany()
                         .HasForeignKey("ParticipanteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -165,11 +168,6 @@ namespace NextEvent.Migrations
                 });
 
             modelBuilder.Entity("NextEvent.Models.Evento", b =>
-                {
-                    b.Navigation("Inscricoes");
-                });
-
-            modelBuilder.Entity("NextEvent.Models.Participante", b =>
                 {
                     b.Navigation("Inscricoes");
                 });
