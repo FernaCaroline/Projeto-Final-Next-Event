@@ -235,4 +235,91 @@ app.MapDelete("/api/participante/deletar/{id}", (
 
 
 
+// Cadastrar Evento
+
+app.MapPost("/api/evento/cadastrar", ([FromBody] Evento evento, [FromServices] AppDataContext db) =>
+{
+    
+    db.Eventos.Add(evento);
+    db.SaveChanges();
+    return Results.Created($"/api/evento/{evento.Id}", new
+    {
+        mensagem = "Evento cadastrado com sucesso!",
+        evento
+    });
+});
+
+// Listar todos os Eventos
+
+app.MapGet("/api/evento/listar", ([FromServices] AppDataContext db) =>
+{
+    var eventos = db.Eventos.ToList();
+    return Results.Ok(eventos);
+});
+
+
+// Buscar evento por ID
+
+app.MapGet("/api/evento/buscar/{id}", (int id, [FromServices] AppDataContext db) =>
+{
+    var evento = db.Eventos.FirstOrDefault(e => e.Id == id);
+    if (evento == null)
+        return Results.NotFound(new { mensagem = "Evento não encontrado." });
+
+    return Results.Ok(evento);
+});
+
+// Atualiza Evento cadastrado
+
+app.MapPatch("/api/evento/atualizar/{id}", (int id, [FromBody] Evento dados, [FromServices] AppDataContext db) =>
+{
+    var evento = db.Eventos.FirstOrDefault(e => e.Id == id);
+    if (evento == null)
+        return Results.NotFound(new { mensagem = "Evento não encontrado." });
+
+    // Só altera o que veio no body (sem sobrescrever o resto)
+    if (!string.IsNullOrEmpty(dados.Nome))
+        evento.Nome = dados.Nome;
+    
+    if (!string.IsNullOrEmpty(dados.Descricao))
+        evento.Descricao = dados.Descricao;
+    
+    if (dados.DataInicio != DateTime.MinValue)
+        evento.DataInicio = dados.DataInicio;
+    
+    if (dados.DataFim != DateTime.MinValue)
+        evento.DataFim = dados.DataFim;
+
+    db.SaveChanges();
+    return Results.Ok(new { mensagem = "Evento atualizado parcialmente com sucesso!", evento });
+});
+
+
+
+
+// Encerrar evento
+app.MapPut("/api/evento/encerrar/{id}", (int id, [FromServices] AppDataContext db) =>
+{
+    var evento = db.Eventos.FirstOrDefault(e => e.Id == id);
+    if (evento == null)
+        return Results.NotFound(new { mensagem = "Evento não encontrado." });
+
+    evento.Ativo = false;
+    db.SaveChanges();
+    return Results.Ok(new { mensagem = "Evento encerrado com sucesso!" });
+});
+
+
+// Deletar evento
+app.MapDelete("/api/evento/deletar/{id}", (int id, [FromServices] AppDataContext db) =>
+{
+    var evento = db.Eventos.FirstOrDefault(e => e.Id == id);
+    if (evento == null)
+        return Results.NotFound(new { mensagem = "Evento não encontrado." });
+
+    db.Eventos.Remove(evento);
+    db.SaveChanges();
+    return Results.Ok(new { mensagem = "Evento removido com sucesso." });
+});
+
 app.Run();
