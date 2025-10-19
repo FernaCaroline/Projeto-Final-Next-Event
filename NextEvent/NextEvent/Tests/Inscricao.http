@@ -1,0 +1,15 @@
+### Realizar inscrição - POST
+POST http://localhost:5162/api/inscricao/cadastrar
+Content-Type: application/json
+
+{
+  "ParticipanteId": 4,
+  "EventoId": 6
+}
+
+
+### Excluir inscrição - DELETE
+DELETE http://localhost:5162/api/inscricao/deletar/4
+
+### Buscar inscrição - GET
+GET http://localhost:5162/api/inscricao/buscar/7

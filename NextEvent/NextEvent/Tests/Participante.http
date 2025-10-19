@@ -1,0 +1,38 @@
+### Cadastrar participante - POST
+POST http://localhost:5162/api/participante/cadastrar
+Content-Type: application/json
+
+{
+  "nome": "Partc Teste 1",
+  "email": "teste1@mail.com",
+  "senha": "Senh@1"
+}
+
+### Validação de login participante - POST
+POST http://localhost:5162/api/participante/login
+Content-Type: application/json
+
+{
+  
+  "Email" : "teste1@mail.com",
+  "Senha" : "Senh@1"
+  
+}
+
+### Listar participantes - GET
+GET http://localhost:5162/api/participante/listar
+Content-Type: application/json
+
+
+### Atualizar participante - PUT
+PUT http://localhost:5162/api/participante/atualizar/4
+Content-Type: application/json
+
+{
+  "nome": "Partc Teste 1 Att",
+  "email": "teste1@mail.com",
+  "senha": "SenhaAtualizada001"
+}
+
+### Deletar participante - DELETE
+DELETE http://localhost:5162/api/participante/deletar/3

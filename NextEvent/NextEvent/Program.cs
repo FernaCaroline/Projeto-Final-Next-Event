@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDataContext>();
 var app = builder.Build();
 
-//  ADMIN - acesso via POST
+//  Cadastro do administrador
 app.MapPost("/api/administrador/cadastrar", (
     [FromBody] Administrador administrador,
     [FromServices] AppDataContext ctx) =>
@@ -31,8 +31,7 @@ app.MapPost("/api/administrador/cadastrar", (
 
 });
 
-// Listar Admins - método GET
-
+// Listar administrador
 app.MapGet("/api/administrador/listar", ([FromServices] AppDataContext ctx) =>
 {
 
@@ -46,8 +45,7 @@ app.MapGet("/api/administrador/listar", ([FromServices] AppDataContext ctx) =>
 
 });
 
-//  Login - POST
-
+//  Login administrador
 app.MapPost("/api/administrador/login", (
     [FromBody] Administrador administrador,
     [FromServices] AppDataContext ctx) =>
@@ -75,8 +73,7 @@ app.MapPost("/api/administrador/login", (
 
 });
 
-// Atualizar adm pelo ID - PUT
-
+// Atualizar adminstrador
 app.MapPut("/api/administrador/atualizar/{id}", (
     [FromRoute] int id,
     [FromBody] Administrador administrador,
@@ -100,20 +97,20 @@ app.MapPut("/api/administrador/atualizar/{id}", (
     ctx.Administradores.Update(resultado);
     ctx.SaveChanges();
 
-    return Results.Ok(ctx.Administradores.ToList());
+    return Results.Ok(resultado);
 });
 
-// Deletar administrador - DELETE
+// Deletar admnistrador - DELETE
 
-app.MapDelete("/api/administrador/deletar/{id}", (
+app.MapDelete("/api/admnistrador/deletar/{id}", (
     [FromRoute] int id,
     [FromServices] AppDataContext ctx) =>
 {
-    Administrador? resultado = ctx.Administradores.FirstOrDefault(x => x.Id == id);
+    var resultado = ctx.Administradores.FirstOrDefault(x => x.Id == id);
 
     if (resultado is null)
     {
-        return Results.NotFound("Administrador não encontrado!");
+        return Results.NotFound("Admnistrador não encontrado!");
     }
 
     ctx.Administradores.Remove(resultado);
@@ -122,10 +119,8 @@ app.MapDelete("/api/administrador/deletar/{id}", (
     return Results.Ok("Administrador deletado com sucesso!");
 });
 
-//**************PARTICIPANTE:
 
-
-// CADASTRAR PARTICIPANTE - POST
+// Cadastro participante
 app.MapPost("/api/participante/cadastrar", (
     [FromBody] Participante participante,
     [FromServices] AppDataContext ctx) =>
@@ -150,7 +145,7 @@ app.MapPost("/api/participante/cadastrar", (
 });
 
 
-// LISTAR PARTICIPANTES - GET
+// Listar participante
 app.MapGet("/api/participante/listar", ([FromServices] AppDataContext ctx) =>
 {
     if (ctx.Participantes.Any())
@@ -162,7 +157,7 @@ app.MapGet("/api/participante/listar", ([FromServices] AppDataContext ctx) =>
 });
 
 
-// LOGIN PARTICIPANTE - POST
+// Login participante
 app.MapPost("/api/participante/login", (
     [FromBody] Participante participante,
     [FromServices] AppDataContext ctx) =>
@@ -189,7 +184,7 @@ app.MapPost("/api/participante/login", (
 });
 
 
-// ATUALIZAR PARTICIPANTE PELO ID - PUT
+// Atualizar participante
 app.MapPut("/api/participante/atualizar/{id}", (
     [FromRoute] int id,
     [FromBody] Participante participante,
@@ -215,7 +210,7 @@ app.MapPut("/api/participante/atualizar/{id}", (
 });
 
 
-// DELETAR PARTICIPANTE - DELETE
+// Deletar participante
 app.MapDelete("/api/participante/deletar/{id}", (
     [FromRoute] int id,
     [FromServices] AppDataContext ctx) =>
@@ -270,7 +265,6 @@ app.MapGet("/api/evento/buscar/{id}", (int id, [FromServices] AppDataContext db)
 });
 
 // Atualiza Evento cadastrado
-
 app.MapPatch("/api/evento/atualizar/{id}", (int id, [FromBody] Evento dados, [FromServices] AppDataContext db) =>
 {
     var evento = db.Eventos.FirstOrDefault(e => e.Id == id);
@@ -321,5 +315,58 @@ app.MapDelete("/api/evento/deletar/{id}", (int id, [FromServices] AppDataContext
     db.SaveChanges();
     return Results.Ok(new { mensagem = "Evento removido com sucesso." });
 });
+
+// Inscrição
+// Create -> Conferir se o partc existe, se o evento existe - se sim, cria, se não, da erro
+app.MapPost("/api/inscricao/cadastrar", ([FromBody] Inscricao inscricao, [FromServices] AppDataContext db) =>
+{
+    //verificação da existência do evento, do participante e de cadastros duplicados
+    var evento = db.Eventos.FirstOrDefault(e => e.Id == inscricao.EventoId && e.Ativo);
+    if (evento == null)
+        return Results.NotFound(new { mensagem = "Evento não encontrado" });
+
+    var participante = db.Participantes.FirstOrDefault(p => p.Id == inscricao.ParticipanteId);
+    if (participante == null)
+        return Results.NotFound(new { mensagem = "Participante não encontrado" });
+
+    bool inscricaoExistente = db.Inscricoes.Any(i => i.EventoId == inscricao.EventoId && i.ParticipanteId == inscricao.ParticipanteId);
+    if (inscricaoExistente)
+        return Results.BadRequest(new { mensagem = "Não é possível cadastrar-se novamente no mesmo evento" });
+
+    db.Inscricoes.Add(inscricao);
+    db.SaveChanges();
+    return Results.Ok(new { mensagem = "Inscrição realizada com sucesso" });
+});
+
+// Deletar inscrição
+app.MapDelete("/api/inscricao/deletar/{id}", (int id, [FromServices] AppDataContext db) =>
+{
+    var inscricao = db.Inscricoes.FirstOrDefault(i => i.Id == id);
+    if (inscricao == null)
+        return Results.NotFound(new { mensagem = "Inscrição não encontrado" });
+
+    db.Inscricoes.Remove(inscricao);
+    db.SaveChanges();
+    return Results.Ok(new { mensagem = "Inscrição removida" });
+});
+
+
+// Buscar inscrição
+app.MapGet("/api/inscricao/buscar/{id}", (int id, [FromServices] AppDataContext db) =>
+{
+    var inscricao = db.Inscricoes.FirstOrDefault(i => i.Id == id);
+    if (inscricao == null)
+        return Results.NotFound(new { mensagem = "Inscrição não encontrado." });
+
+    return Results.Ok(inscricao);
+});
+
+
+
+
+
+
+
+
 
 app.Run();

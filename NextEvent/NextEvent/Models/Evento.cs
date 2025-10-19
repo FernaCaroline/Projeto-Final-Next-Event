@@ -20,7 +20,5 @@ public class Evento
 
     // 🔗 Relacionamentos
     public int AdministradorId { get; set; }
-    public Administrador? Administrador { get; set; }
 
-    public ICollection<Inscricao>? Inscricoes { get; set; }
 }
