@@ -1,0 +1,34 @@
+### Cadastrar evento - POST
+POST http://localhost:5162/api/evento/cadastrar
+Content-Type: application/json
+
+{
+  "nome": "TESTE SEMIFINAL DO FINAL",
+  "descricao": "Evento de teste, descrição 001",
+  "dataInicio": "2025-11-10T09:00:00",
+  "dataFim": "2025-11-12T18:00:00",
+  "administradorId": 2
+}
+
+### Listar eventos
+GET http://localhost:5162/api/evento/listar
+
+### Buscar evento por ID
+GET http://localhost:5162/api/evento/buscar/1
+
+### Atualizar evento
+PATCH http://localhost:5162/api/evento/atualizar/4
+Content-Type: application/json
+
+{
+  "nome": "TESTE FINAL DO FINAL",
+  "descricao": "Versão atualizada do evento principal",
+  "dataInicio": "2025-11-11T09:00:00",
+  "dataFim": "2025-11-13T18:00:00"
+}
+
+### Encerrar evento
+PUT http://localhost:5162/api/evento/encerrar/4
+
+### Deletar evento
+DELETE http://localhost:5162/api/evento/deletar/3   
