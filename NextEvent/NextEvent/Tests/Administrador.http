@@ -34,4 +34,4 @@ Content-Type: application/json
 }
 
 ### Deletar administrador - DELETE
-DELETE http://localhost:5162/api/admnistrador/deletar/4
+DELETE http://localhost:5162/api/administrador/deletar/4

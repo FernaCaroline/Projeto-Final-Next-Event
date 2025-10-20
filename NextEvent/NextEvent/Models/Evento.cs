@@ -17,8 +17,6 @@ public class Evento
     public DateTime DataFim { get; set; }
     public bool Ativo { get; set; }
     public DateTime CriadoEm { get; set; }
-
-    // 🔗 Relacionamentos
     public int AdministradorId { get; set; }
 
 }

@@ -100,17 +100,17 @@ app.MapPut("/api/administrador/atualizar/{id}", (
     return Results.Ok(resultado);
 });
 
-// Deletar admnistrador - DELETE
+// Deletar admnistrador
 
-app.MapDelete("/api/admnistrador/deletar/{id}", (
+app.MapDelete("/api/administrador/deletar/{id}", (
     [FromRoute] int id,
     [FromServices] AppDataContext ctx) =>
 {
-    var resultado = ctx.Administradores.FirstOrDefault(x => x.Id == id);
+    Administrador? resultado = ctx.Administradores.FirstOrDefault(x => x.Id == id);
 
     if (resultado is null)
     {
-        return Results.NotFound("Admnistrador não encontrado!");
+        return Results.NotFound("Administrador não encontrado!");
     }
 
     ctx.Administradores.Remove(resultado);
