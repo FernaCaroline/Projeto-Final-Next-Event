@@ -12,4 +12,4 @@ Content-Type: application/json
 DELETE http://localhost:5162/api/inscricao/deletar/4
 
 ### Buscar inscrição - GET
-GET http://localhost:5162/api/inscricao/buscar/7
+GET http://localhost:5162/api/inscricao/buscar/8
