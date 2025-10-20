@@ -3,8 +3,8 @@ POST http://localhost:5162/api/administrador/cadastrar
 Content-Type: application/json
 
 {
-  "Nome" : "NvTeste 1",
-  "Email" : "nvteste1@gmail.com",
+  "Nome" : "NvTeste6565",
+  "Email" : "nvteste5@gmail.com",
   "Senha" : "Senh@NvTest123"
 }
 
@@ -17,10 +17,8 @@ POST http://localhost:5162/api/administrador/login
 Content-Type: application/json
 
 {
-  
-  "Email" : "nvteste1@gmail.com",
-  "Senha" : "Senh@NvTest1"
-  
+  "Email" : "nvteste5@gmail.com",
+  "Senha" : "Senh@NvTest123"
 }
 
 ### Atualizar administrador - PUT

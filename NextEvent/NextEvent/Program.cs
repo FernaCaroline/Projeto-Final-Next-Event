@@ -1,5 +1,6 @@
 using NextEvent.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDataContext>();
@@ -18,7 +19,7 @@ app.MapPost("/api/administrador/cadastrar", (
     bool resultado = ctx.Administradores.Any(x => x.Email == administrador.Email);
     if (resultado)
     {
-        return Results.Conflict("Administrador já cadastrado!");
+        return Results.Conflict("E-mail já cadastrado!");
     }
 
     string hashSenha = BCrypt.Net.BCrypt.HashPassword(administrador.Senha);
@@ -354,7 +355,30 @@ app.MapDelete("/api/inscricao/deletar/{id}", (int id, [FromServices] AppDataCont
 // Buscar inscrição
 app.MapGet("/api/inscricao/buscar/{id}", (int id, [FromServices] AppDataContext db) =>
 {
-    var inscricao = db.Inscricoes.FirstOrDefault(i => i.Id == id);
+    var inscricao = db.Inscricoes
+        .Where(i => i.Id == id)
+        .Select( i => new
+        {
+            Inscricao = i.Id,
+            DataDaInscricao = i.DataInscricao,
+            Participante = new
+            {
+                
+                ParticipanteId = i.Participante.Id,
+                Nome = i.Participante.Nome,
+                Email = i.Participante.Email,
+            },
+            
+            Evento = new
+            {
+                EventoId = i.Evento.Id,
+                Nome = i.Evento.Nome,
+                DataInicio = i.Evento.DataInicio,
+                DataFim = i.Evento.DataFim
+            }
+        })
+        .FirstOrDefault();
+    
     if (inscricao == null)
         return Results.NotFound(new { mensagem = "Inscrição não encontrado." });
 
