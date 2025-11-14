@@ -11,8 +11,43 @@ import {BrowserRouter, Route, Routes, Link} from "react-router-dom";
 
 function App() {
   return (
-    <div>
-      <h1>Inicio do FrontEnd do projeto NextEvent</h1>
+   <div id="componente_app">
+      <BrowserRouter>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/eventos/listar">Lista de eventos</Link>
+            </li>
+            <li>
+              <Link to="/eventos/inscricao">Inscrição em Eventos</Link>
+            </li>
+            <li>
+              <Link to="/eventos/buscar">Pesquisar eventos</Link>
+            </li>
+            <li>
+              <Link to="/eventos/atualizar">Atualizar Eventos</Link>
+            </li>
+             <li>
+              <Link to="/cadastro/evento">Criar Evento</Link>
+            </li>
+            <li>
+              <Link to="/cadastro/participante">Cadastro do Participante</Link>
+            </li>
+            <li>
+              <Link to="/cadastro/adiministradores">Cadastro do Adiministrador</Link>
+            </li>
+          </ul>
+        </nav>
+         <Routes>
+            <Route path="/eventos/listar" element={< ListarEventos/>} />
+            <Route path="/eventos/inscricao" element={<RealizarInscricao/>} />
+            <Route path="/eventos/buscar" element={<BuscarEventoID/>} />
+            <Route path="/eventos/atualizar" element={<AtualizarEvento/>} />
+            <Route path="/cadastro/evento" element={<CadastrarEvento/>} />
+            <Route path="/cadastro/participante" element={<CadastrarParticipante/>} />
+            <Route path="/cadastro/adiministradores" element={<CadastrarAdiministrador/>} />
+          </Routes>
+      </BrowserRouter>
     </div>
   );
 }
