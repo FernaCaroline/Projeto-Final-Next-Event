@@ -5,12 +5,55 @@ import { error } from "console";
 import axios from "axios";
 //Ja deixei os imports preparados, para não correr o risco de esquecermos, lembrem que devem instalar as bibliotecas localmente.
 
-function CadastrarParticipante(){
-     return(
-        <div>
+//Anna
+
+function CadastrarParticipante() {
+    const [nome, setNome] = useState("");
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+
+    function cadastraParticipante(e : any){
+        e.preventDefault()
+        cadastrarParticipanteAPI()
+    }
+
+    async function cadastrarParticipanteAPI() {
+        try{
+                const participante : Participante = {
+                    nome,
+                    email,
+                    senha,
+                };
+                const resposta = await axios.post("http://localhost:5162/api/participante/cadastrar", participante);
+                console.log(resposta.data);
+            }catch(error){
+                console.log("Erro no cadastro do participante: " + error);
+            }
+        }    
+        return(
+            <div>
             <h1>Cadastrar Participante</h1>
+            <form onSubmit={cadastraParticipante}>
+                <div>
+                    <label>Nome:</label>
+                    {/* No onChange você pode criar uma função separada pra cada um */}
+                    <input onChange={(e : any) => setNome(e.target.value)} type="text" /> 
+                </div>
+                <div>
+                    <label>Email:</label>
+                    <input onChange={(e : any) => setEmail(e.target.value)} type="text" />
+                </div>
+                <div>
+                    <label>senha:</label>
+                    <input onChange={(e : any) => setSenha(e.target.value)} type="text" />
+                </div>
+                <div>
+                    <button type="submit">Cadastrar</button>   
+                </div>
+            </form>
         </div>
-     )
+            
+        )
 }
 
 export default CadastrarParticipante;

@@ -5,7 +5,7 @@ import axios from "axios";
 function BuscarEventoID(){
      return(
         <div>
-            <h1>Buscar Evento por ID</h1>
+            <h1>Atualizar Evento</h1>
         </div>
      )
 }
