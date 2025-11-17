@@ -12,7 +12,7 @@ function CadastrarParticipante() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
-    function cadastraParticipante(e : any){
+    function cadastrarParticipante(e : any){
         e.preventDefault()
         cadastrarParticipanteAPI()
     }
@@ -33,7 +33,7 @@ function CadastrarParticipante() {
         return(
             <div>
             <h1>Cadastrar Participante</h1>
-            <form onSubmit={cadastraParticipante}>
+            <form onSubmit={cadastrarParticipante}>
                 <div>
                     <label>Nome:</label>
                     {/* No onChange você pode criar uma função separada pra cada um */}
@@ -44,7 +44,7 @@ function CadastrarParticipante() {
                     <input onChange={(e : any) => setEmail(e.target.value)} type="text" />
                 </div>
                 <div>
-                    <label>senha:</label>
+                    <label>Senha:</label>
                     <input onChange={(e : any) => setSenha(e.target.value)} type="text" />
                 </div>
                 <div>
