@@ -22,7 +22,7 @@ function CadastrarParticipante() {
                 const participante : Participante = {
                     nome,
                     email,
-                    senha,
+                    senha
                 };
                 const resposta = await axios.post("http://localhost:5162/api/participante/cadastrar", participante);
                 console.log(resposta.data);

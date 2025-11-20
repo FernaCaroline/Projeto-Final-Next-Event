@@ -48,12 +48,12 @@ function CadastrarEvento(){
                     <input onChange={(e : any) => setDescricao(e.target.value)} type="text" />
                 </div>
                 <div>
-                    <label>senha:</label>
-                    <input onChange={(e : any) => setDataInicio(e.target.value)} type="text" />
+                    <label>Data Início:</label>
+                    <input onChange={(e : any) => setDataInicio(e.target.value)} type="datetime-local" />
                 </div>
                 <div>
-                    <label>senha:</label>
-                    <input onChange={(e : any) => setDataFim(e.target.value)} type="text" />
+                    <label>Data Fim:</label>
+                    <input onChange={(e : any) => setDataFim(e.target.value)} type="datetime-local" />
                 </div>
                 <div>
                     <button type="submit">Cadastrar</button>   
