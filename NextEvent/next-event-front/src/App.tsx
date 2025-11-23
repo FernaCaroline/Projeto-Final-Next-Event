@@ -39,13 +39,13 @@ function App() {
           </ul>
         </nav>
          <Routes>
-            <Route path="/eventos/listar" element={< ListarEventos/>} />
-            <Route path="/eventos/inscricao" element={<RealizarInscricao/>} />
-            <Route path="/eventos/buscar" element={<BuscarEventoID/>} />
-            <Route path="/eventos/atualizar" element={<AtualizarEvento/>} />
-            <Route path="/cadastro/evento" element={<CadastrarEvento/>} />
-            <Route path="/cadastro/participante" element={<CadastrarParticipante/>} />
-            <Route path="/cadastro/adiministradores" element={<CadastrarAdiministrador/>} />
+             <Route path="/eventos/listar" element={< ListarEventos/>} />
+             <Route path="/eventos/inscricao" element={<RealizarInscricao/>} />
+             <Route path="/eventos/buscar" element={<BuscarEventoID/>} />
+             <Route path="/eventos/atualizar/:id" element={<AtualizarEvento/>} />
+             <Route path="/cadastro/evento" element={<CadastrarEvento/>} />
+             <Route path="/cadastro/participante" element={<CadastrarParticipante/>} />
+             <Route path="/cadastro/adiministradores" element={<CadastrarAdiministrador/>} />
           </Routes>
       </BrowserRouter>
     </div>

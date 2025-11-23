@@ -13,6 +13,10 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod());
 });
 
+builder.Services.AddCors(
+    options => options.AddPolicy("Acesso Total",
+        configs => configs.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod())
+);
 var app = builder.Build();
 app.UseCors("front");
 
@@ -400,7 +404,5 @@ app.MapGet("/api/inscricao/buscar/{id}", (int id, [FromServices] AppDataContext 
 
 
 
-
-
-
+app.UseCors("Acesso Total");
 app.Run();
