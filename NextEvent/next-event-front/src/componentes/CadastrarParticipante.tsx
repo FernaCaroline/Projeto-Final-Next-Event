@@ -1,9 +1,6 @@
-// Não vejo necessidade de no front termos a listagem de participantes, ja que não cabe ao usuário final ver uma lista do banco de dados.
 import { useState } from "react";
 import Participante from "../interfaces/Participante";
-import { error } from "console";
 import axios from "axios";
-//Ja deixei os imports preparados, para não correr o risco de esquecermos, lembrem que devem instalar as bibliotecas localmente.
 
 //Anna
 
@@ -12,48 +9,53 @@ function CadastrarParticipante() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
-    function cadastrarParticipante(e : any){
-        e.preventDefault()
-        cadastrarParticipanteAPI()
+    function cadastrarParticipante(e: any) {
+        e.preventDefault();
+        cadastrarParticipanteAPI();
     }
 
     async function cadastrarParticipanteAPI() {
-        try{
-                const participante : Participante = {
-                    nome,
-                    email,
-                    senha
-                };
-                const resposta = await axios.post("http://localhost:5162/api/participante/cadastrar", participante);
-                console.log(resposta.data);
-            }catch(error){
-                console.log("Erro no cadastro do participante: " + error);
-            }
-        }    
-        return(
-            <div>
+        try {
+            const participante: Participante = {
+                nome,
+                email,
+                senha
+            };
+
+            const resposta = await axios.post(
+                "http://localhost:5162/api/participante/cadastrar",
+                participante
+            );
+
+            console.log(resposta.data);
+            alert("Participante cadastrado com sucesso!");
+        } catch (error) {
+            console.log("Erro no cadastro do participante: " + error);
+        }
+    }
+
+    return (
+        <div>
             <h1>Cadastrar Participante</h1>
             <form onSubmit={cadastrarParticipante}>
                 <div>
                     <label>Nome:</label>
-                    {/* No onChange você pode criar uma função separada pra cada um */}
-                    <input onChange={(e : any) => setNome(e.target.value)} type="text" /> 
+                    <input type="text" onChange={(e) => setNome(e.target.value)} />
                 </div>
                 <div>
                     <label>Email:</label>
-                    <input onChange={(e : any) => setEmail(e.target.value)} type="text" />
+                    <input type="text" onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div>
                     <label>Senha:</label>
-                    <input onChange={(e : any) => setSenha(e.target.value)} type="text" />
+                    <input type="password" onChange={(e) => setSenha(e.target.value)} />
                 </div>
                 <div>
-                    <button type="submit">Cadastrar</button>   
+                    <button type="submit">Cadastrar</button>
                 </div>
             </form>
         </div>
-            
-        )
+    );
 }
 
 export default CadastrarParticipante;

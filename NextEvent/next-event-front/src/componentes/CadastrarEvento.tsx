@@ -32,7 +32,9 @@ function CadastrarEvento(){
                 };
                 const resposta = await axios.post("http://localhost:5162/api/evento/cadastrar", evento);
                 console.log(resposta.data);
-            }catch(error){
+            alert("Evento cadastrado com sucesso!");
+
+        }catch(error){
                 console.log("Erro no cadastro do evento: " + error);
             }
         }    
