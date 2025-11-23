@@ -1,7 +1,7 @@
 export default interface Inscricao{
-    id?: string;
-    participanteId: string;
+    id?: number;
+    participanteId: number;
     participante: string;
-    eventoId: string;
+    eventoId: number;
     evento?: string;
 }

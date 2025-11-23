@@ -28,6 +28,7 @@ function CadastrarParticipante() {
             );
 
             console.log(resposta.data);
+            alert("Participante cadastrado com sucesso!");
         } catch (error) {
             console.log("Erro no cadastro do participante: " + error);
         }

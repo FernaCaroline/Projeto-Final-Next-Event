@@ -26,6 +26,7 @@ function CadastrarAdministrador() {
             );
 
             console.log(resposta.data);
+            alert("Administrador cadastrado com sucesso!");
         } catch (error) {
             console.log("Erro no cadastro do administrador: " + error);
         }

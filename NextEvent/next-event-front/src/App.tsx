@@ -28,9 +28,6 @@ function App() {
             <li>
               <Link to="/eventos/buscar">Pesquisar eventos</Link>
             </li>
-            <li>
-              <Link to="/eventos/atualizar">Atualizar Eventos</Link>
-            </li>
              <li>
               <Link to="/cadastro/evento">Criar Evento</Link>
             </li>
@@ -40,12 +37,6 @@ function App() {
             <li>
               <Link to="/cadastro/administradores">Cadastro do Adiministrador</Link>
             </li>
-            <li>
-                <Link to="/participante/listar">Listar Participantes</Link>
-            </li>
-            <li>
-                <Link to="/administrador/listar">Listar Administradores</Link>
-            </li>    
           </ul>
         </nav>
          <Routes>
