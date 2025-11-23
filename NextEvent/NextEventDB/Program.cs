@@ -134,6 +134,21 @@ app.MapDelete("/api/administrador/deletar/{id}", (
     return Results.Ok("Administrador deletado com sucesso!");
 });
 
+// Buscar administrador por ID
+app.MapGet("/api/administrador/buscar/{id}", (
+    [FromRoute] int id,
+    [FromServices] AppDataContext ctx) =>
+{
+    var administrador = ctx.Administradores.FirstOrDefault(x => x.Id == id);
+
+    if (administrador is null)
+        return Results.NotFound("Administrador não encontrado!");
+
+    return Results.Ok(administrador);
+});
+
+
+
 
 // Cadastro participante
 app.MapPost("/api/participante/cadastrar", (
@@ -242,6 +257,20 @@ app.MapDelete("/api/participante/deletar/{id}", (
 
     return Results.Ok("Participante deletado com sucesso!");
 });
+
+// Buscar participante por ID
+app.MapGet("/api/participante/buscar/{id}", (
+    [FromRoute] int id,
+    [FromServices] AppDataContext ctx) =>
+{
+    var participante = ctx.Participantes.FirstOrDefault(x => x.Id == id);
+
+    if (participante is null)
+        return Results.NotFound("Participante não encontrado!");
+
+    return Results.Ok(participante);
+});
+
 
 
 
