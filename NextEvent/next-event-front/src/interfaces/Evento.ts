@@ -1,5 +1,5 @@
 export default interface Evento{
-    id?: string;
+    id?: number;
     nome: string;
     descricao: string;
     // . Precisa ver qual o tipo de dado que tem que colocar nas datas, eu não lembro, no DB é DateTime
@@ -8,4 +8,5 @@ export default interface Evento{
     // . 
     criadoEm?: string;
     ativo?: boolean;
+    administradorId?: number;
 }

@@ -9,6 +9,7 @@ function CadastrarEvento(){
     const [descricao, setDescricao] = useState("");
     const [dataInicio, setDataInicio] = useState("");
     const [dataFim, setDataFim] = useState("");
+    const [administradorId, setAdministradorId] = useState(1);
 
     // descricao: string;
     // // . Precisa ver qual o tipo de dado que tem que colocar nas datas, eu não lembro, no DB é DateTime
@@ -27,6 +28,7 @@ function CadastrarEvento(){
                     descricao,
                     dataInicio,
                     dataFim,
+                    administradorId: Number(administradorId)
                 };
                 const resposta = await axios.post("http://localhost:5162/api/evento/cadastrar", evento);
                 console.log(resposta.data);
@@ -54,6 +56,14 @@ function CadastrarEvento(){
                 <div>
                     <label>Data Fim:</label>
                     <input onChange={(e : any) => setDataFim(e.target.value)} type="datetime-local" />
+                </div>
+                <div>
+                    <label>Administrador ID:</label>
+                    <input
+                        type="number"
+                        value={administradorId}
+                        onChange={(e)=> setAdministradorId(Number(e.target.value))}
+                    />
                 </div>
                 <div>
                     <button type="submit">Cadastrar</button>   
