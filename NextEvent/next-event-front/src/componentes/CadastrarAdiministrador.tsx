@@ -1,57 +1,58 @@
-// Não vejo necessidade de no front termos a listagem de adiministradores, ja que não cabe ao usuário final ver uma lista do banco de dados.
 import { useState } from "react";
-import Adiministrador from "../interfaces/Adiministrador";
-import { error } from "console";
+import Administrador from "../interfaces/Adiministrador";
 import axios from "axios";
-//Ja deixei os imports preparados, para não correr o risco de esquecermos, lembrem que devem instalar as bibliotecas localmente.
 
-function CadastrarAdiministrador(){
+function CadastrarAdministrador() {
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
-    function cadastrarAdiministrador(e : any){
-        e.preventDefault()
-        cadastrarAdiministradorAPI()
+    function cadastrarAdministrador(e: any) {
+        e.preventDefault();
+        cadastrarAdministradorAPI();
     }
 
-    async function cadastrarAdiministradorAPI() {
-        try{
-                const adiministrador : Adiministrador = {
-                    nome,
-                    email,
-                    senha,
-                };
-                const resposta = await axios.post("http://localhost:5162/api/administrador/cadastrar", adiministrador);
-                console.log(resposta.data);
-            }catch(error){
-                console.log("Erro no cadastro do adiministrador: " + error);
-            }
-        }    
-        return(
-            <div>
-            <h1>Cadastrar Adiministrador</h1>
-            <form onSubmit={cadastrarAdiministrador}>
+    async function cadastrarAdministradorAPI() {
+        try {
+            const administrador: Administrador = {
+                nome,
+                email,
+                senha
+            };
+
+            const resposta = await axios.post(
+                "http://localhost:5162/api/administrador/cadastrar",
+                administrador
+            );
+
+            console.log(resposta.data);
+        } catch (error) {
+            console.log("Erro no cadastro do administrador: " + error);
+        }
+    }
+
+    return (
+        <div>
+            <h1>Cadastrar Administrador</h1>
+            <form onSubmit={cadastrarAdministrador}>
                 <div>
                     <label>Nome:</label>
-                    {/* No onChange você pode criar uma função separada pra cada um */}
-                    <input onChange={(e : any) => setNome(e.target.value)} type="text" /> 
+                    <input type="text" onChange={(e) => setNome(e.target.value)} />
                 </div>
                 <div>
                     <label>Email:</label>
-                    <input onChange={(e : any) => setEmail(e.target.value)} type="text" />
+                    <input type="text" onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div>
                     <label>Senha:</label>
-                    <input onChange={(e : any) => setSenha(e.target.value)} type="text" />
+                    <input type="password" onChange={(e) => setSenha(e.target.value)} />
                 </div>
                 <div>
-                    <button type="submit">Cadastrar</button>   
+                    <button type="submit">Cadastrar</button>
                 </div>
             </form>
         </div>
-            
-        )
+    );
 }
 
-export default CadastrarAdiministrador;
+export default CadastrarAdministrador;

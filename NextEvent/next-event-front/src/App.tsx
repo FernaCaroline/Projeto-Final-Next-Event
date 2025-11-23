@@ -6,7 +6,11 @@ import AtualizarEvento from './componentes/AtualizarEvento';
 import BuscarEventoID from './componentes/BuscarEventoID';
 import ListarEventos from './componentes/ListarEventos';
 import RealizarInscricao from "./componentes/RealizarInscricacao";
+import ListarParticipante   from "./componentes/ListarParticipante";
 import {BrowserRouter, Route, Routes, Link} from "react-router-dom";
+import AtualizarParticipante from "./componentes/AtualizarParticipante";
+import ListarAdministrador from "./componentes/ListarAdministrador";
+import AtualizarAdministrador from "./componentes/AtualizarAdministrador";
 //Ja deixei os imports preparados, para não correr o risco de esquecermos, lembrem que devem instalar as bibliotecas localmente.
 
 function App() {
@@ -34,8 +38,14 @@ function App() {
               <Link to="/cadastro/participante">Cadastro do Participante</Link>
             </li>
             <li>
-              <Link to="/cadastro/adiministradores">Cadastro do Adiministrador</Link>
+              <Link to="/cadastro/administradores">Cadastro do Adiministrador</Link>
             </li>
+            <li>
+                <Link to="/participante/listar">Listar Participantes</Link>
+            </li>
+            <li>
+                <Link to="/administrador/listar">Listar Administradores</Link>
+            </li>    
           </ul>
         </nav>
          <Routes>
@@ -45,7 +55,11 @@ function App() {
              <Route path="/eventos/atualizar/:id" element={<AtualizarEvento/>} />
              <Route path="/cadastro/evento" element={<CadastrarEvento/>} />
              <Route path="/cadastro/participante" element={<CadastrarParticipante/>} />
-             <Route path="/cadastro/adiministradores" element={<CadastrarAdiministrador/>} />
+             <Route path="/cadastro/administradores" element={<CadastrarAdiministrador/>} />
+             <Route path="/participante/listar" element={<ListarParticipante />} />
+             <Route path="/participante/Atualizar/:id" element={<AtualizarParticipante />} />
+             <Route path="/administrador/listar" element={<ListarAdministrador />} />
+             <Route path="/administrador/Atualizar/:id" element={<AtualizarAdministrador />} />
           </Routes>
       </BrowserRouter>
     </div>
