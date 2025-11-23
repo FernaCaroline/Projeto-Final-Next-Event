@@ -43,12 +43,12 @@ function CadastrarEvento(){
             <h1>Cadastrar Evento</h1>
             <form onSubmit={cadastrarEvento}>
                 <div>
-                    <label>Nome:</label>
+                    <label>Título:</label>
                     {/* No onChange você pode criar uma função separada pra cada um */}
                     <input onChange={(e : any) => setNome(e.target.value)} type="text" /> 
                 </div>
                 <div>
-                    <label>Email:</label>
+                    <label>Descrição:</label>
                     <input onChange={(e : any) => setDescricao(e.target.value)} type="text" />
                 </div>
                 <div>

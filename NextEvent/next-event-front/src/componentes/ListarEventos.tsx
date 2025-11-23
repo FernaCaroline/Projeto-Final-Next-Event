@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import Evento from "../interfaces/Evento";
 import axios from "axios";
-import { Link } from "react-router-dom"; // já estava no outro
+import { Link } from "react-router-dom";
+import "./Componentes.css";// já estava no outro
 
 //Anna
 

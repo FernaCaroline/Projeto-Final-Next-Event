@@ -2,6 +2,7 @@ import { useState } from "react";
 import Inscricao from "../interfaces/Inscricao";
 import { error } from "console";
 import axios from "axios";
+import "./Componentes.css";
 //Ja deixei os imports preparados, para não correr o risco de esquecermos, lembrem que devem instalar as bibliotecas localmente.
 
 //Anna - tentar fazer, talvez tenha que tirar duvidas na próxima aula
@@ -38,7 +39,7 @@ function RealizarInscricao(){
 
 
         return(
-         <div>
+         <div id="realizar_inscricacao_container">
             <h1>Realizar Inscrição</h1>
             <form onSubmit={realizarInscricao}>
                 <div>
