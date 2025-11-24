@@ -11,6 +11,7 @@ import {BrowserRouter, Route, Routes, Link} from "react-router-dom";
 import AtualizarParticipante from "./componentes/AtualizarParticipante";
 import ListarAdministrador from "./componentes/ListarAdministrador";
 import AtualizarAdministrador from "./componentes/AtualizarAdministrador";
+import './App.css';
 //Ja deixei os imports preparados, para não correr o risco de esquecermos, lembrem que devem instalar as bibliotecas localmente.
 
 function App() {
@@ -18,6 +19,10 @@ function App() {
    <div id="componente_app">
       <BrowserRouter>
         <nav>
+            <Link to="/" className="nav-logo">
+                <img src="/logonextevent.png" alt="NextEvent Logo" />
+                <span>NextEvent</span>
+            </Link>
           <ul>
             <li>
               <Link to="/eventos/listar">Lista de eventos</Link>

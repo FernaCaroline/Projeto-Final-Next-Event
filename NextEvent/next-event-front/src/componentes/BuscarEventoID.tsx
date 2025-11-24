@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Evento from "../interfaces/Evento";
 import axios from "axios";
+import "./Componentes.css";
 
 function BuscarEventoID() {
   const [id, setId] = useState("");
@@ -21,7 +22,7 @@ function BuscarEventoID() {
   }
 
   return (
-    <div>
+      <div id="buscar_evento_container">
       <h1>Buscar Evento por ID</h1>
 
       <input
